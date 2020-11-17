@@ -3,19 +3,21 @@
     <head>
         <title> Sign Up Page </title>
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        <link href='https://fonts.googleapis.com/css?family=Aladin' rel='stylesheet'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="js/main.js" type="text/javascript"></script>
     </head>
     <body>
-        <h1> Sign Up </h1>
+        <header>
+            <h1> Sign Up </h1>
+        </header>
         
         <form id="signupForm" action="welcome.html">
             First Name: <input type="text" name="fName"><br>
             Last Name:  <input type="text" name="lName"><br>
-            Gender:     <input type="radio" name="gender" value="m"> Male<br>
-                        <input type="radio" name="gender" value="f"> Female<br>
+            Gender:     <input type="radio" name="gender" value="m"> Male<input type="radio" name="gender" value="f"> Female<br>
         
-            Zip Code:   <input type="text" id="zip" name="zip"><br>
+            Zip Code:   <input type="text" id="zip" name="zip"><span id="zipError"></span><br>
             City:       <span id="city"></span><br>
             Latitude:   <span id="latitude"></span><br>
             Longitude:  <span id="longitude"></span><br><br>
@@ -23,21 +25,18 @@
             State:
             <select id="state" name="state">
                 <option> Select One </option>
-                <option value="ca"> California </option>
-                <option value="ny"> New York   </option>
-                <option value="tx"> Texas      </option>
             </select><br>
         
-            Select a County:  <select id="county"></select><br>
+            Select a County:  <select id="county"></select><br><br />
         
-            Desired Username: <input type="text" id="username" name="username"><br>
+            Desired Username: <input type="text" id="username" name="username">
                               <span id="usernameError"></span><br>
             Password:         <input type="password" id="password" name="password"><br>
             Password Again:   <input type="password" id="passwordAgain">
                               <span id="passwordAgainError"></span> <br /><br>
                               <span id="passwordLengthError"></span> <br /><br>
         
-            <input type="submit" value="Sign up!">
+            <input type="submit" class="submitBtn" value="Sign up!">
             
         </form>
         

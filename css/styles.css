@@ -1,3 +1,31 @@
+header, footer, h2{
+    text-align: center;
+}
+header{
+    font-family:"Aladin";
+    font-size: 4vw;
+    color: SteelBlue;
+}
+body{
+    background-color: NavajoWhite;
+}
+#signupForm{
+    font-family:"Aladin";
+    font-size: 2vw;
+    color: SteelBlue;
+    text-align: center;
+}
+.submitBtn{
+    padding: 10px 100px;
+    background-color:SteelBlue;
+    font-family:"Aladin";
+    font-size: 24px;
+    transition-duration: 0.4s;
+}
+.submitBtn:hover{
+    background-color:green;
+    color: white;
+}
 footer {
     color:Black;
     font-size: small;

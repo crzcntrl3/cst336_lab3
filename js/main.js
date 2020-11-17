@@ -1,8 +1,11 @@
 $(document).ready(function(){
     /*global $*/
     /*global fetch*/
-    var usernameAvailable = false;
-        
+    let usernameAvailable = false;
+    let zipCodeFound = true;
+    
+    displayStates();
+    
     //Displaying City from API after typing a zip code
     $("#zip").on("change",async function(){
         //alert($("#zip").val());
@@ -14,13 +17,29 @@ $(document).ready(function(){
         $("#city").html(data.city);
         $("#latitude").html(data.latitude);
         $("#longitude").html(data.longitude);
+        
+        if(data == false){
+            $("#zipError").html("Zip code not found!");
+            $("#zipError").css("color","red");
+            zipCodeFound = false;
+        }
                 
     });//zip
+    
+    //display states
+    async function displayStates(){
+        let url = "https://cst336.herokuapp.com/projects/api/state_abbrAPI.php";
+        let response = await fetch(url);
+        let data = await response.json();
+        for (let i = 0; i < data.length; i++){
+            $("#state").append(`<option value = "${data[i].usps}"> ${data[i].state} </option>`);
+        }
+    }
         
     $("#state").on("change", async function(){
         //alert($("#state").val()); 
         let state = $("#state").val();
-        let url = `https://itcdland.csumb.edu/~milara/ajax/countyList.php?state=${state}`;
+        let url = `https://cst336.herokuapp.com/projects/api/countyListAPI.php?state=${state}`;
         let response = await fetch(url);
         let data = await response.json();
         //consol.log(data)
@@ -28,9 +47,9 @@ $(document).ready(function(){
         for(let i = 0; i < data.length; i++){
             $("#county").append(`<option> ${data[i].county} </option>`);
         }
-                
-    });//state
         
+    });//state
+    
     $("#username").on("change",async function(){
         //alert($("#username").val());
         let username = $("#username").val();
@@ -50,32 +69,39 @@ $(document).ready(function(){
         
     });//username
         
-    $("#signupForm").on("submit", function(e) {
+    $("#signupForm").on("submit", function(event) {
         //alert("Submitting form...");
         if(!isFormValid()){
-            e.preventDefault();
+            event.preventDefault();
         }
-            
-    });
         
+    });
+    
     function isFormValid(){
-        var isValid = true;
-        if(!usernameAvailable) {
+        let isValid = true;
+        if(!usernameAvailable){
             isValid = false;
         }
-            
-        if ($("#username").val().length == 0){
+        
+        //if zip code not found
+        if(!zipCodeFound){
+            isValid = false;
+        }
+        
+        if($("#username").val().length== 0){
             isValid = false;
             $("#usernameError").html("Username is required");
+            $("#usernameError").css("color","red");
         }
-            
-        if ($("$password").val() != $("#passwordAgain").val()){
+        
+        if($("#password").val() != $("#passwordAgain").val()){
             $("#passwordAgainError").html("Password Mismatch!");
+            $("#passwordAgainError").css("color","red");
             isValid = false;
         }
-            
-        if ($("#password").val().length < 6){
-            $("#passwordLengthError").html("Minimum of 6 characters for password! Try again!");
+        
+        if($("#password").val().length && $("#passwordAgain").val().length < 6){
+            $("#passwordLengthError").html("Password requires minimum of 6 characters, try again!")
             $("#passwordLengthError").css("color","red");
             isValid = false;
         }
