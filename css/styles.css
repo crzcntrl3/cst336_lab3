@@ -1,0 +1,11 @@
+footer {
+    color:Black;
+    font-size: small;
+    justify-content: center;
+}
+.footer-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
