@@ -87,15 +87,21 @@ $(document).ready(function(){
         if(!zipCodeFound){
             isValid = false;
         }
-        
-        if($("#username").val().length== 0){
+        //check if username is not blank
+        if($("#username").val().length== 0 && $("#username").val().typeof != "string"){
             isValid = false;
             $("#usernameError").html("Username is required");
             $("#usernameError").css("color","red");
         }
-        
+        //check if password is blank
+        if($("#password").val().length == 0 || $("#passwordAgain").val().length == 0){
+            isValid = false;
+            $("#passwordLengthError").html("No input detected. Please try again!");
+            $("#passwordLengthError").css("color","red");
+        }
+        //check password entries for matching value
         if($("#password").val() != $("#passwordAgain").val()){
-            $("#passwordAgainError").html("Password Mismatch!");
+            $("#passwordAgainError").html("Retype Password!");
             $("#passwordAgainError").css("color","red");
             isValid = false;
         }
